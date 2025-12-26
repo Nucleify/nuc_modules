@@ -23,8 +23,9 @@ class ModuleInstallerController extends Controller
             $file = $request->file('file');
 
             $tempPath = $file->getRealPath();
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $result = $this->service->install($tempPath);
+            $result = $this->service->install($tempPath, 'modules', $originalName);
 
             if ($result) {
                 return response()->json([

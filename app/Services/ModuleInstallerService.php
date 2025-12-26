@@ -20,12 +20,14 @@ class ModuleInstallerService
 
     /**
      * @param string $path
+     * @param string|null $installPath
+     * @param string|null $originalName
      *
      * @return Module|null
      *
      * @throws Exception
      */
-    public function install(string $path, ?string $installPath = 'modules'): ?Module
+    public function install(string $path, ?string $installPath = 'modules', ?string $originalName = null): ?Module
     {
         $this->defineUserData();
 
@@ -39,8 +41,10 @@ class ModuleInstallerService
             throw new Exception('Failed to unzip ZIP file: ' . $e->getMessage());
         }
 
+        $moduleName = $originalName ?? pathinfo($path, PATHINFO_FILENAME);
+
         $moduleData = [
-            'name' => pathinfo($path, PATHINFO_FILENAME),
+            'name' => $moduleName,
             'description' => '',
             'category' => 'Custom',
             'version' => '1.0.0',
@@ -51,13 +55,10 @@ class ModuleInstallerService
         $existingModule = $this->model::where('name', $moduleData['name'])->first();
 
         if ($existingModule) {
-            $result = $existingModule->update($moduleData)->fresh();
-
-            $action = 'updated';
+            $existingModule->update($moduleData);
+            $result = $existingModule->fresh();
         } else {
             $result = $this->model::create($moduleData);
-
-            $action = 'installed';
         }
 
         return $result;
