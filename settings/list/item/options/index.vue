@@ -1,50 +1,78 @@
 <template>
-  <speed-dial 
+  <ad-speed-dial 
     :model="items"
     direction="left"
-    class="modules-settings-list-item-options"
+    class="modules-settings-options"
   >
     <template #button="{ toggleCallback }">
-      <ad-button text rounded icon="prime:ellipsis-h" @click="toggleCallback" />
+      <ad-button 
+        text
+        rounded
+        icon="prime:ellipsis-h"
+        :ad-type="props.enabled && 'main'"
+        :severity="!props.enabled && 'secondary'"
+        @click="toggleCallback"
+      />
     </template>
     <template #item="{ item, toggleCallback }">
       <div @click="toggleCallback">
         <ad-icon :icon="item.icon" @click="item.command" v-tooltip.top="item.label" />
       </div>
     </template>
-  </speed-dial>
+  </ad-speed-dial>
+
+  <nuc-modules-item-options-dialog
+    v-model:visible="dialogVisible"
+    :name="props.name"
+    :enabled="props.enabled"
+    :action="currentAction"
+    @confirm="confirmAction"
+  />
 </template>
 
 <script setup lang="ts">
 import type { ModuleObjectInterface } from 'atomic'
+import { toggleModule, uninstallModule } from 'atomic'
 
-import { uninstallModule } from 'atomic'
+import { type ModuleDialogAction, NucModulesItemOptionsDialog } from '.'
 
 const props = defineProps<ModuleObjectInterface>()
-const emit = defineEmits(['moduleUninstalled'])
+const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
 const router = useRouter()
 
-const items = ref([
+const dialogVisible = ref(false)
+const currentAction = ref<ModuleDialogAction>('uninstall')
+
+const openDialog = (action: ModuleDialogAction) => {
+  currentAction.value = action
+  dialogVisible.value = true
+}
+
+const confirmAction = () => {
+  if (currentAction.value === 'uninstall') {
+    uninstallModule(props.name, () => emit('moduleUninstalled'))
+  } else {
+    toggleModule(props.name, props.enabled, () => emit('moduleToggled'))
+  }
+}
+
+const items = computed(() => [
   {
     label: 'Show',
     icon: 'prime:info-circle',
     command: () => {
       router.push(`/settings#module-${props.name}`)
-    }
+    },
   },
   {
     label: props.enabled ? 'Disable' : 'Enable',
     icon: props.enabled ? 'prime:times-circle' : 'prime:check-circle',
-    command: () => {
-      console.log('enable')
-    }
+    command: () => openDialog('toggle'),
   },
   {
     label: 'Uninstall',
     icon: 'prime:trash',
-    command: () => {
-      uninstallModule(props.name, () => emit('moduleUninstalled'))
-    }
+    command: () => openDialog('uninstall'),
   },
 ])
 </script>

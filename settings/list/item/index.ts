@@ -1,3 +1,3 @@
 export * from './options'
 
-export { default as NucModulesListItem } from './index.vue'
+export { default as NucModulesSettingsItem } from './index.vue'

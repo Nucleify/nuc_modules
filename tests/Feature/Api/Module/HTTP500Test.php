@@ -74,4 +74,16 @@ describe('500', function (): void {
             ->assertStatus(500)
             ->assertJson(['error' => 'Internal Server Error']);
     });
+
+    test('toggle api', function (): void {
+        $this->service
+            ->shouldReceive('toggle')
+            ->with('non_existent_module')
+            ->once()
+            ->andThrow(new Exception('Module config file not found: non_existent_module'));
+
+        $this->patchJson(route('modules.toggle'), ['name' => 'non_existent_module'])
+            ->assertStatus(500)
+            ->assertJson(['error' => 'Module config file not found: non_existent_module']);
+    });
 });

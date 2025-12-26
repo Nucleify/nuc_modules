@@ -9,6 +9,7 @@ uses()->group('module-controller');
 use App\Http\Controllers\ModuleController;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PutRequest;
+use App\Http\Requests\ToggleRequest;
 use App\Models\Module;
 use App\Services\ModuleService;
 use Illuminate\Http\Request;
@@ -60,6 +61,15 @@ describe('200', function (): void {
         $request->shouldReceive('validated')->andReturn(updatedModuleData);
 
         $response = $this->controller->update($request, $model->id);
+
+        expect($response->getStatusCode(), $response->getData(true))->toEqual(200);
+    });
+
+    test('toggle method', function (): void {
+        $request = Mockery::mock(ToggleRequest::class);
+        $request->shouldReceive('validated')->andReturn(['name' => 'nuc_api']);
+
+        $response = $this->controller->toggle($request);
 
         expect($response->getStatusCode(), $response->getData(true))->toEqual(200);
     });

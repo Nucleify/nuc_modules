@@ -67,4 +67,9 @@ describe('401', function (): void {
         ['message'],
         ['message' => 'Unauthenticated.']
     ));
+
+    test('toggle api', function (): void {
+        $this->patchJson(route('modules.toggle'), ['name' => 'nuc_api'])
+            ->assertUnauthorized();
+    });
 });

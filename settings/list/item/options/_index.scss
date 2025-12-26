@@ -1,5 +1,5 @@
-#settings .modules-settings-card .modules-settings-list .modules-settings-list-item {
-  &-options {
+#settings .modules-settings-card .modules-settings-list .modules-settings-item {
+  .modules-settings-options {
     position: relative;
 
     button {
@@ -44,5 +44,24 @@
         border: 1px solid $p-card-border;
       }
     }
+  }
+}
+
+.modules-settings-options-dialog {
+  width: 100%;
+  max-width: 400px;
+
+  .p-dialog-content {
+    padding-bottom: .5em;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .p-dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
   }
 }

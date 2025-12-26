@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PutRequest;
+use App\Http\Requests\ToggleRequest;
 use App\Models\Module;
 use App\Services\ModuleService;
 use Exception;
@@ -92,6 +93,17 @@ class ModuleController extends Controller
                 $result,
                 'message' => 'Successfully updated: ' . $result['name'],
             ]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function toggle(ToggleRequest $request): JsonResponse
+    {
+        try {
+            $result = $this->service->toggle($request->validated()['name']);
+
+            return response()->json($result);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

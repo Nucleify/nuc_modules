@@ -4,7 +4,11 @@
       <nuc-modules-settings-install-module @module-installed="refreshModules" />
     </template>
     <template #content>
-      <nuc-modules-list :data="modules" @module-uninstalled="refreshModules" />
+      <nuc-modules-list
+        :data="modules"
+        @module-toggled="refreshModules" 
+        @module-uninstalled="refreshModules" 
+      />
     </template>
   </ad-card>
 </template>
