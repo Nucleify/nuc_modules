@@ -1,5 +1,5 @@
 <template>
-  <div class="modules-settings-card-list">
+  <div class="modules-settings-list">
     <nuc-modules-list-item 
       v-for="module in props.data"
       v-bind="module"

@@ -1,6 +1,7 @@
 @import 'item';
 
-#settings .panel-container .modules-settings-card .modules-settings-card-list {
+#settings .modules-settings-card .modules-settings-list {
+  position: relative;
   display: flex !important;
   flex-direction: column;
   justify-content: start;
