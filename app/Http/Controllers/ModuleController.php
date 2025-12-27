@@ -57,10 +57,10 @@ class ModuleController extends Controller
         }
     }
 
-    public function show($id): JsonResponse
+    public function show($name): JsonResponse
     {
         try {
-            $result = $this->service->show($id);
+            $result = $this->service->show($name);
 
             return response()->json($result);
         } catch (Exception $e) {
