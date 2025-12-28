@@ -83,12 +83,10 @@
           >
             <div class="step-panel-container">
               <transition name="fade" mode="out-in">
-                <div v-if="activeStep === module.value" class="readme-content">
-                  <div
-                    v-if="readmeContents[module.value]"
-                    v-sanitize-html="readmeContents[module.value]"
-                  ></div>
-                </div>
+                <nuc-modules-readme
+                  v-if="activeStep === module.value"
+                  :module-path="module.path"
+                />
               </transition>
             </div>
           </StepPanel>
@@ -99,12 +97,10 @@
 </template>
 
 <script setup lang="ts">
-import { marked } from 'marked'
-
 import {
-  apiHandle,
   bounceFadeIn,
   isMobile,
+  NucModulesReadme,
   navigateToUrl,
   useScrollTrigger,
 } from 'atomic'
@@ -112,27 +108,7 @@ import {
 import { modules } from './constants'
 
 const activeStep = ref(1)
-const readmeContents = ref<Record<number, string>>({})
 const modulesSwiper = ref(null)
-
-const loadReadme = async (modulePath: string, value: number) => {
-  try {
-    await apiHandle({
-      url: appUrl() + `/modules/${modulePath}/README.md`,
-      method: 'GET',
-      onSuccess: (data) => {
-        const html = marked.parse(data)
-        readmeContents.value[value] = html
-        readmeContents.value[value] = readmeContents.value[value].replaceAll(
-          '/public',
-          appUrl()
-        )
-      },
-    })
-  } catch (error) {
-    console.error(`Error loading README for ${modulePath}:`, error)
-  }
-}
 
 useSwiper(modulesSwiper, {
   loop: true,
@@ -143,15 +119,6 @@ useSwiper(modulesSwiper, {
   slidesPerView: isMobile() ? 6 : 7,
   slidesPerGroup: 2,
   spaceBetween: 24,
-})
-
-watch(activeStep, (newValue) => {
-  if (newValue > 1) {
-    const module = modules.find((m) => m.value === newValue)
-    if (module && !readmeContents.value[newValue]) {
-      loadReadme(module.path, newValue)
-    }
-  }
 })
 
 useScrollTrigger(

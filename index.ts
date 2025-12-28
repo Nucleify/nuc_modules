@@ -8,6 +8,7 @@ export * from './nuc_modules'
  */
 export * from './atomic'
 export * from './settings'
+export * from './utils'
 
 /**
  *  File exports

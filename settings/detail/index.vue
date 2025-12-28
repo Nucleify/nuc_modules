@@ -14,6 +14,13 @@
         </div>
         <div class="modules-settings-detail-header-actions">
           <ad-button
+            v-if="module"
+            label="Documentation"
+            icon="prime:file"
+            severity="secondary"
+            @click="readmeDialogVisible = true"
+          />
+          <ad-button
             :label="module?.enabled ? 'Disable' : 'Enable'"
             :icon="module?.enabled ? 'prime:times-circle' : 'prime:check-circle'"
             severity="secondary"
@@ -92,6 +99,12 @@
     action="uninstall"
     @confirm="handleUninstall"
   />
+
+  <nuc-modules-settings-detail-readme-dialog
+    v-model:visible="readmeDialogVisible"
+    :module-name="module?.name"
+    :module-path="moduleName || undefined"
+  />
 </template>
 
 <script setup lang="ts">
@@ -102,6 +115,7 @@ import type { ModuleObjectInterface } from 'atomic'
 import { apiRequest, toggleModule, uninstallModule } from 'atomic'
 
 import { NucModulesItemOptionsDialog } from '../list/item/options'
+import NucModulesSettingsDetailReadmeDialog from './dialog.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -110,6 +124,7 @@ const moduleData = ref<ModuleObjectInterface | null>(null)
 const loading = ref(true)
 const toggleDialogVisible = ref(false)
 const uninstallDialogVisible = ref(false)
+const readmeDialogVisible = ref(false)
 
 const moduleName = computed(() => {
   const hash = route.hash.replace('#module-', '')
