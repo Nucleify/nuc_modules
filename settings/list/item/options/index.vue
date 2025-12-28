@@ -1,5 +1,5 @@
 <template>
-  <ad-speed-dial 
+  <SpeedDial
     :model="items"
     direction="left"
     class="modules-settings-options"
@@ -19,7 +19,7 @@
         <ad-icon :icon="item.icon" @click="item.command" v-tooltip.top="item.label" />
       </div>
     </template>
-  </ad-speed-dial>
+  </SpeedDial>
 
   <nuc-modules-item-options-dialog
     v-model:visible="dialogVisible"

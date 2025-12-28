@@ -43,17 +43,17 @@ class ModuleService
     }
 
     /**
-     * @param int $id
+     * @param string $name
      *
      * @return ModuleResource
      *
      * @throws Exception
      */
-    public function show($id): ModuleResource
+    public function show($name): ModuleResource
     {
         $this->defineUserData();
 
-        $result = $this->model::findOrFail($id);
+        $result = $this->model::where('name', $name)->firstOrFail();
 
         $this->logger->log($this->causer->name, $result->getName(), $this->entity, 'showed');
 
@@ -145,6 +145,11 @@ class ModuleService
         $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         $json = str_replace('    ', '  ', $json);
         file_put_contents($configPath, $json . "\n");
+
+        $module = $this->model::where('name', $name)->first();
+        if ($module) {
+            $module->update(['enabled' => $config['enabled']]);
+        }
 
         $status = $config['enabled'] ? 'enabled' : 'disabled';
 

@@ -18,7 +18,7 @@ Route::middleware(['web', 'auth'])->prefix('api')->group(function (): void {
                 ->name('modules.index');
             Route::get('/all', 'getAllModules')
                 ->name('modules.getAllModules');
-            Route::get('/{id}', 'show')
+            Route::get('/{name}', 'show')
                 ->name('modules.show');
             Route::post('/', 'store')
                 ->name('modules.store');
