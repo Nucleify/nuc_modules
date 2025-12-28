@@ -7,6 +7,7 @@ use App\Resources\ModuleResource;
 use App\Traits\Setters\RequestSetterTrait;
 use App\Traits\Setters\TimeSetterTrait;
 use App\Traits\Setters\UserSetterTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -114,5 +115,41 @@ class ModuleService
         $result->delete();
 
         $this->logger->log($this->causer->name, $result->getName(), $this->entity, 'deleted');
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return array
+     *
+     * @throws Exception
+     */
+    public function toggle(string $name): array
+    {
+        $this->defineUserData();
+
+        $configPath = base_path('modules/' . $name . '/config.json');
+
+        if (!file_exists($configPath)) {
+            throw new Exception("Module config file not found: {$name}");
+        }
+
+        $config = json_decode(file_get_contents($configPath), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception("Invalid JSON in config file: {$name}");
+        }
+
+        $config['enabled'] = !($config['enabled'] ?? true);
+
+        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $json = str_replace('    ', '  ', $json);
+        file_put_contents($configPath, $json . "\n");
+
+        $status = $config['enabled'] ? 'enabled' : 'disabled';
+
+        $this->logger->log($this->causer->name, $name, $this->entity, $status);
+
+        return $config;
     }
 }

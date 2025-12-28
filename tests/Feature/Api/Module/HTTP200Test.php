@@ -53,4 +53,17 @@ describe('200', function (): void {
             ->assertOk();
         $this->assertDatabaseMissing('modules', ['id' => $model->id]);
     });
+
+    test('toggle api', function (): void {
+        $this->patchJson(route('modules.toggle'), ['name' => 'nuc_api'])
+            ->assertOk()
+            ->assertJsonStructure([
+                'name',
+                'description',
+                'version',
+                'category',
+                'installed',
+                'enabled',
+            ]);
+    });
 });

@@ -24,6 +24,8 @@ Route::middleware(['web', 'auth'])->prefix('api')->group(function (): void {
                 ->name('modules.store');
             Route::put('/{id}', 'update')
                 ->name('modules.update');
+            Route::patch('/toggle', 'toggle')
+                ->name('modules.toggle');
             Route::delete('/{id}', 'destroy')
                 ->name('modules.destroy');
         });

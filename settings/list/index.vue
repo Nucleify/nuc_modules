@@ -1,21 +1,19 @@
 <template>
-  <div class="modules-settings-card-list">
-    <nuc-modules-list-item 
+  <div class="modules-settings-list">
+    <nuc-modules-settings-item 
       v-for="module in props.data"
       v-bind="module"
-      :key="module.id"
-      @module-uninstalled="$emit('moduleUninstalled')"
+      :key="module.name"
+      @module-toggled="emit('moduleToggled')"
+      @module-uninstalled="emit('moduleUninstalled')"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { NucModulesListInterface } from '.'
-import { NucModulesListItem } from '.'
+import { NucModulesSettingsItem } from '.'
 
 const props = defineProps<NucModulesListInterface>()
-
-const emit = defineEmits<{
-  moduleUninstalled: []
-}>()
+const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
 </script>
