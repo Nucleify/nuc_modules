@@ -8,7 +8,6 @@
     gap: 1em;
     border-radius: 0.5em;
     transition: background-color 0.3s ease;
-    cursor: pointer;
     padding: 0.125em 0.5em 0.125em 0.125em;
 
     &:hover {
@@ -17,6 +16,15 @@
 
     &:not(.active) {
       background-color: $content-background;
+    }
+
+    &-link {
+      flex: 1;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 1em;
+      text-decoration: none;
     }
 
     &-container {
@@ -38,6 +46,7 @@
       label {
         font-weight: 500;
         cursor: pointer;
+        color: $white-text-color;
       }
 
       p {
@@ -51,6 +60,7 @@
         -webkit-line-clamp: 2;
         line-clamp: 2;
         -webkit-box-orient: vertical;
+        color: $white-text-color;
       }
     }
   }

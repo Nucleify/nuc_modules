@@ -3,6 +3,7 @@
     :model="items"
     direction="left"
     class="modules-settings-options"
+    @click.stop
   >
     <template #button="{ toggleCallback }">
       <ad-button 
