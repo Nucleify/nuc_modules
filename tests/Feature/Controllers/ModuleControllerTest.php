@@ -40,7 +40,7 @@ describe('200', function (): void {
     test('show method', function (): void {
         $model = Module::factory()->create();
 
-        $response = $this->controller->show($model->id);
+        $response = $this->controller->show($model->name);
 
         expect($response->getStatusCode(), $response->getData(true))->toEqual(200);
     });

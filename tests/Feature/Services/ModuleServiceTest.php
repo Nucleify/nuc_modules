@@ -39,16 +39,16 @@ describe('ModuleService', function (): void {
     });
 
     describe('show', function (): void {
-        test('returns module resource by id', function (): void {
+        test('returns module resource by name', function (): void {
             $module = Module::factory()->create();
 
-            $result = $this->service->show($module->id);
+            $result = $this->service->show($module->name);
 
             expect($result)->toBeInstanceOf(ModuleResource::class);
         });
 
-        test('throws exception for non-existent id', function (): void {
-            $this->service->show(99999);
+        test('throws exception for non-existent name', function (): void {
+            $this->service->show('non_existent_module');
         })->throws(ModelNotFoundException::class);
     });
 

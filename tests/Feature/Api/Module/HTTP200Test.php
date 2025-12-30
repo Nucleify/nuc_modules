@@ -35,7 +35,7 @@ describe('200', function (): void {
     test('show api', function (): void {
         $model = Module::factory()->create();
 
-        $this->getJson(route('modules.show', $model->id))
+        $this->getJson(route('modules.show', $model->name))
             ->assertOk();
     });
 

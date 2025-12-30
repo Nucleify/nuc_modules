@@ -30,11 +30,11 @@ describe('500', function (): void {
     test('show api', function (): void {
         $this->service
             ->shouldReceive('show')
-            ->with(1)
+            ->with('test_module')
             ->once()
             ->andThrow(new Exception('Internal Server Error'));
 
-        $this->getJson(route('modules.show', ['id' => 1]))
+        $this->getJson(route('modules.show', 'test_module'))
             ->assertStatus(500)
             ->assertJson(['error' => 'Internal Server Error']);
     });
