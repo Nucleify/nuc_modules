@@ -1,10 +1,18 @@
 import type { App } from 'vue'
-
-import { NucModulesInfo, NucModulesSettings, NucModulesSettingsDetail } from '.'
+import { defineAsyncComponent } from 'vue'
 
 export function registerNucModules(app: App<Element>): void {
   app
-    .component('nuc-modules-info', NucModulesInfo)
-    .component('nuc-modules-settings', NucModulesSettings)
-    .component('nuc-modules-settings-detail', NucModulesSettingsDetail)
+    .component(
+      'nuc-modules-info',
+      defineAsyncComponent(() => import('./atomic/section/info/index.vue'))
+    )
+    .component(
+      'nuc-modules-settings',
+      defineAsyncComponent(() => import('./settings/index.vue'))
+    )
+    .component(
+      'nuc-modules-settings-detail',
+      defineAsyncComponent(() => import('./settings/detail/index.vue'))
+    )
 }
