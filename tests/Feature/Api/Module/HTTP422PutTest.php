@@ -9,276 +9,234 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PUT', function ($updatedModuleData = updatedModuleData) {
+describe('422 > PUT', function (): void {
+    apiTestArray([
+        // NAME
+        'name > empty string' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['name' => '']),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
+        'name > empty array' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['name' => []]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field is required.']]],
+        ],
+        'name > false' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['name' => false]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > true' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['name' => true]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
+        'name > integer' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['name' => 1]),
+            'structure' => ['errors' => ['name']],
+            'fragment' => ['errors' => ['name' => ['The name field must be a string.']]],
+        ],
 
-    /**
-     * NAME
-     */
-    $updatedModuleData['name'] = '';
-    test('name > empty string', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['name']],
-        ['errors' => ['name' => ['The name field is required.']]],
-    ));
+        // DESCRIPTION
+        'description > integer' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['description' => 12345]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
+        'description > false' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['description' => false]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
+        'description > true' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['description' => true]),
+            'structure' => ['errors' => ['description']],
+            'fragment' => ['errors' => ['description' => ['The description field must be a string.']]],
+        ],
 
-    $updatedModuleData['name'] = [];
-    test('name > empty array', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['name']],
-        ['errors' => ['name' => ['The name field is required.']]],
-    ));
+        // CATEGORY
+        'category > empty array' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['category' => []]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > null' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['category' => null]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > true' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['category' => true]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
+        'category > false' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['category' => false]),
+            'structure' => ['errors' => ['category']],
+            'fragment' => ['errors' => ['category' => ['The category field must be a string.']]],
+        ],
 
-    $updatedModuleData['name'] = false;
-    test('name > false', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['name']],
-        ['errors' => ['name' => ['The name field must be a string.']]],
-    ));
+        // VERSION
+        'version > empty array' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['version' => []]),
+            'structure' => ['errors' => ['version']],
+            'fragment' => ['errors' => ['version' => ['The version field is required.']]],
+        ],
+        'version > float' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['version' => 1.1]),
+            'structure' => ['errors' => ['version']],
+            'fragment' => ['errors' => ['version' => ['The version field must be a string.']]],
+        ],
+        'version > true' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['version' => true]),
+            'structure' => ['errors' => ['version']],
+            'fragment' => ['errors' => ['version' => ['The version field must be a string.']]],
+        ],
+        'version > false' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['version' => false]),
+            'structure' => ['errors' => ['version']],
+            'fragment' => ['errors' => ['version' => ['The version field must be a string.']]],
+        ],
 
-    $updatedModuleData['name'] = true;
-    test('name > true', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['name']],
-        ['errors' => ['name' => ['The name field must be a string.']]],
-    ));
+        // ENABLED
+        'enabled > string' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['enabled' => 'string']),
+            'structure' => ['errors' => ['enabled']],
+            'fragment' => ['errors' => ['enabled' => ['The enabled field must be true or false.']]],
+        ],
+        'enabled > empty string' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['enabled' => '']),
+            'structure' => ['errors' => ['enabled']],
+            'fragment' => ['errors' => ['enabled' => ['The enabled field is required.']]],
+        ],
+        'enabled > empty array' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['enabled' => []]),
+            'structure' => ['errors' => ['enabled']],
+            'fragment' => ['errors' => ['enabled' => ['The enabled field is required.']]],
+        ],
+        'enabled > null' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['enabled' => null]),
+            'structure' => ['errors' => ['enabled']],
+            'fragment' => ['errors' => ['enabled' => ['The enabled field is required.']]],
+        ],
 
-    $updatedModuleData['name'] = 1;
-    test('name > integer', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['name']],
-        ['errors' => ['name' => ['The name field must be a string.']]],
-    ));
-
-    $updatedModuleData['name'] = updatedModuleData['name'];
-
-    /**
-     * DESCRIPTION
-     */
-    $updatedModuleData['description'] = 12345;
-    test('description > integer', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['description']],
-        ['errors' => ['description' => ['The description field must be a string.']]],
-    ));
-
-    $updatedModuleData['description'] = false;
-    test('description > false', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['description']],
-        ['errors' => ['description' => ['The description field must be a string.']]],
-    ));
-
-    $updatedModuleData['description'] = true;
-    test('description > true', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['description']],
-        ['errors' => ['description' => ['The description field must be a string.']]],
-    ));
-
-    $updatedModuleData['description'] = updatedModuleData['description'];
-
-    /**
-     * CATEGORY
-     */
-    $updatedModuleData['category'] = [];
-    test('category > empty array', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['category']],
-        ['errors' => ['category' => ['The category field must be a string.']]],
-    ));
-
-    $updatedModuleData['category'] = null;
-    test('category > null', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['category']],
-        ['errors' => ['category' => ['The category field must be a string.']]],
-    ));
-
-    $updatedModuleData['category'] = true;
-    test('category > true', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['category']],
-        ['errors' => ['category' => ['The category field must be a string.']]],
-    ));
-
-    $updatedModuleData['category'] = false;
-    test('category > false', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['category']],
-        ['errors' => ['category' => ['The category field must be a string.']]],
-    ));
-
-    $updatedModuleData['category'] = updatedModuleData['category'];
-
-    /**
-     * VERSION
-     */
-    $updatedModuleData['version'] = [];
-    test('version > empty array', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['version']],
-        ['errors' => ['version' => ['The version field is required.']]],
-    ));
-
-    $updatedModuleData['version'] = 1.1;
-    test('version > float', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['version']],
-        ['errors' => ['version' => ['The version field must be a string.']]],
-
-    ));
-
-    $updatedModuleData['version'] = true;
-    test('version > true', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['version']],
-        ['errors' => ['version' => ['The version field must be a string.']]],
-    ));
-
-    $updatedModuleData['version'] = false;
-    test('version > false', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['version']],
-        ['errors' => ['version' => ['The version field must be a string.']]],
-    ));
-
-    $updatedModuleData['version'] = updatedModuleData['version'];
-
-    /**
-     * ENABLED
-     */
-    $updatedModuleData['enabled'] = 'string';
-    test('enabled > string', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['enabled']],
-        ['errors' => ['enabled' => ['The enabled field must be true or false.']]],
-    ));
-
-    $updatedModuleData['enabled'] = '';
-    test('enabled > empty string', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['enabled']],
-        ['errors' => ['enabled' => ['The enabled field is required.']]],
-    ));
-
-    $updatedModuleData['enabled'] = [];
-    test('enabled > empty array', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['enabled']],
-        ['errors' => ['enabled' => ['The enabled field is required.']]],
-    ));
-
-    $updatedModuleData['enabled'] = null;
-    test('enabled > null', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['enabled']],
-        ['errors' => ['enabled' => ['The enabled field is required.']]],
-    ));
-
-    $updatedModuleData['enabled'] = updatedModuleData['enabled'];
-
-    /**
-     * INSTALLED
-     */
-    $updatedModuleData['installed'] = 'string';
-    test('installed > string', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['installed']],
-        ['errors' => ['installed' => ['The installed field must be true or false.']]],
-    ));
-
-    $updatedModuleData['installed'] = '';
-    test('installed > empty string', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['installed']],
-        ['errors' => ['installed' => ['The installed field is required.']]],
-    ));
-
-    $updatedModuleData['installed'] = [];
-    test('installed > empty array', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['installed']],
-        ['errors' => ['installed' => ['The installed field is required.']]],
-    ));
-
-    $updatedModuleData['installed'] = null;
-    test('installed > null', apiTest(
-        'PUT',
-        'modules.update',
-        422,
-        $updatedModuleData,
-        ['errors' => ['installed']],
-        ['errors' => ['installed' => ['The installed field is required.']]],
-    ));
-
-    $updatedModuleData['installed'] = updatedModuleData['installed'];
+        // INSTALLED
+        'installed > string' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['installed' => 'string']),
+            'structure' => ['errors' => ['installed']],
+            'fragment' => ['errors' => ['installed' => ['The installed field must be true or false.']]],
+        ],
+        'installed > empty string' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['installed' => '']),
+            'structure' => ['errors' => ['installed']],
+            'fragment' => ['errors' => ['installed' => ['The installed field is required.']]],
+        ],
+        'installed > empty array' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['installed' => []]),
+            'structure' => ['errors' => ['installed']],
+            'fragment' => ['errors' => ['installed' => ['The installed field is required.']]],
+        ],
+        'installed > null' => [
+            'method' => 'PUT',
+            'route' => 'modules.update',
+            'status' => 422,
+            'id' => 1,
+            'data' => array_merge(updatedModuleData, ['installed' => null]),
+            'structure' => ['errors' => ['installed']],
+            'fragment' => ['errors' => ['installed' => ['The installed field is required.']]],
+        ],
+    ]);
 });

@@ -9,50 +9,49 @@ beforeEach(function (): void {
     $this->actingAs($this->admin);
 });
 
-describe('422 > PATCH', function ($toggleData = ['name' => 'nuc_api']) {
-
-    /**
-     * NAME
-     */
-    $toggleData['name'] = '';
-    test('name > empty string', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
-
-    $toggleData['name'] = [];
-    test('name > empty array', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
-
-    $toggleData['name'] = false;
-    test('name > false', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
-
-    $toggleData['name'] = true;
-    test('name > true', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
-
-    $toggleData['name'] = 1;
-    test('name > integer', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
-
-    unset($toggleData['name']);
-    test('name > missing', function () use ($toggleData) {
-        $this->patchJson(route('modules.toggle'), $toggleData)
-            ->assertUnprocessable()
-            ->assertJsonValidationErrors(['name']);
-    });
+describe('422 > PATCH', function (): void {
+    apiTestArray([
+        'name > empty string' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => ['name' => ''],
+            'errors' => ['name'],
+        ],
+        'name > empty array' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => ['name' => []],
+            'errors' => ['name'],
+        ],
+        'name > false' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => ['name' => false],
+            'errors' => ['name'],
+        ],
+        'name > true' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => ['name' => true],
+            'errors' => ['name'],
+        ],
+        'name > integer' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => ['name' => 1],
+            'errors' => ['name'],
+        ],
+        'name > missing' => [
+            'method' => 'PATCH',
+            'route' => 'modules.toggle',
+            'status' => 422,
+            'data' => [],
+            'errors' => ['name'],
+        ],
+    ]);
 });

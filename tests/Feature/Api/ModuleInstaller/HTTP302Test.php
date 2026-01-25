@@ -13,23 +13,30 @@ beforeEach(function (): void {
 });
 
 describe('302', function (): void {
-    test('post > install api', function (): void {
-        $this->post(route('modules.install', []))
-            ->assertStatus(302);
-    });
-
-    test('put > install api', function (): void {
-        $this->put(route('modules.install', []))
-            ->assertStatus(302);
-    });
-
-    test('post > uninstall api', function (): void {
-        $this->post(route('modules.uninstall', []))
-            ->assertStatus(302);
-    });
-
-    test('put > uninstall api', function (): void {
-        $this->put(route('modules.uninstall', []))
-            ->assertStatus(302);
-    });
+    apiTestArray([
+        'post > install api' => [
+            'method' => 'POST',
+            'route' => 'modules.install',
+            'status' => 302,
+            'json' => false,
+        ],
+        'put > install api' => [
+            'method' => 'PUT',
+            'route' => 'modules.install',
+            'status' => 302,
+            'json' => false,
+        ],
+        'post > uninstall api' => [
+            'method' => 'POST',
+            'route' => 'modules.uninstall',
+            'status' => 302,
+            'json' => false,
+        ],
+        'put > uninstall api' => [
+            'method' => 'PUT',
+            'route' => 'modules.uninstall',
+            'status' => 302,
+            'json' => false,
+        ],
+    ]);
 });
