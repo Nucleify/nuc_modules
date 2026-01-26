@@ -1,7 +1,7 @@
 {
   "name": "nuc_modules",
   "description": "Module that manages the modules of the application.",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "category": "core",
   "installed": true,
   "enabled": true
