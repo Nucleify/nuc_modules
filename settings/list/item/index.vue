@@ -34,3 +34,7 @@ import { NucModulesItemOptions } from '.'
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
 </script>
+
+<style lang="scss">
+@import 'index';
+</style>

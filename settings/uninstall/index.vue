@@ -19,3 +19,7 @@ const emit = defineEmits<{
   moduleUninstalled: []
 }>()
 </script>
+
+<style lang="scss">
+@import 'index';
+</style>

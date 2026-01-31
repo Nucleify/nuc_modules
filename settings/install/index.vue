@@ -90,3 +90,7 @@ function onUpload(): void {
   handleUpload()
 }
 </script>
+
+<style lang="scss">
+@import 'index';
+</style>

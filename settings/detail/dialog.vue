@@ -27,3 +27,7 @@ import type { ModuleReadmeDialogInterface } from './types'
 const props = defineProps<ModuleReadmeDialogInterface>()
 const visible = defineModel<boolean>('visible', { default: false })
 </script>
+
+<style lang="scss">
+@import './_dialog.scss';
+</style>
