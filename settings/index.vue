@@ -39,3 +39,7 @@ onMounted(async () => {
   await loadModules()
 })
 </script>
+
+<style lang="scss">
+@import 'index';
+</style>

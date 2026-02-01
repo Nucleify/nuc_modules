@@ -17,3 +17,7 @@ import { NucModulesSettingsItem } from '.'
 const props = defineProps<NucModulesListInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
 </script>
+
+<style lang="scss">
+@import 'index';
+</style>
