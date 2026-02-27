@@ -10,5 +10,6 @@ class nuc_modules extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
     }
 }
