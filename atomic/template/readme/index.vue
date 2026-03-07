@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { loadReadme } from 'atomic'
+import { loadReadme } from 'nucleify'
 
 export interface ModuleReadmeInterface {
   modulePath?: string

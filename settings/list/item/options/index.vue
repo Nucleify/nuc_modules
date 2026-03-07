@@ -32,10 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ModuleObjectInterface } from 'atomic'
-import { toggleModule, uninstallModule } from 'atomic'
-
 import { type ModuleDialogAction, NucModulesItemOptionsDialog } from '.'
+
+import type { ModuleObjectInterface } from 'nucleify'
+import { toggleModule, uninstallModule } from 'nucleify'
 
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])

@@ -1,6 +1,6 @@
 import { marked } from 'marked'
 
-import { apiHandle } from 'atomic'
+import { apiHandle } from 'nucleify'
 
 export async function loadReadme(
   modulePath: string,

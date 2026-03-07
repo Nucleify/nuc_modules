@@ -1,4 +1,4 @@
-import { ModuleObjectInterface } from 'atomic'
+import { ModuleObjectInterface } from 'nucleify'
 
 export interface NucModulesListInterface {
   data: ModuleObjectInterface[]

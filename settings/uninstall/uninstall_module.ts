@@ -1,5 +1,5 @@
-import type { UseToastInterface } from 'atomic'
-import { apiHandle, useAtomicToast } from 'atomic'
+import type { UseToastInterface } from 'nucleify'
+import { apiHandle, useAtomicToast } from 'nucleify'
 
 export async function uninstallModule(
   name: string,

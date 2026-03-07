@@ -20,8 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { NucModulesReadme } from 'atomic'
-
+import { NucModulesReadme } from 'nucleify'
 import type { ModuleReadmeDialogInterface } from './types'
 
 const props = defineProps<ModuleReadmeDialogInterface>()
