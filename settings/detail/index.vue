@@ -113,6 +113,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 import type { ModuleObjectInterface } from 'nucleify'
 import { apiRequest, toggleModule, uninstallModule } from 'nucleify'
+
 import { NucModulesItemOptionsDialog } from '../list/item/options'
 import NucModulesSettingsDetailReadmeDialog from './dialog.vue'
 

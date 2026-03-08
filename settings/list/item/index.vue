@@ -27,9 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import { NucModulesItemOptions } from '.'
-
 import type { ModuleObjectInterface } from 'nucleify'
+
+import { NucModulesItemOptions } from '.'
 
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])

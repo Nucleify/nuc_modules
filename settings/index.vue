@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { NucModulesList, NucModulesSettingsInstallModule } from '.'
-
 import type { ModuleObjectInterface } from 'nucleify'
 import { apiRequest } from 'nucleify'
+
+import { NucModulesList, NucModulesSettingsInstallModule } from '.'
 
 const modules = ref<ModuleObjectInterface[]>([])
 

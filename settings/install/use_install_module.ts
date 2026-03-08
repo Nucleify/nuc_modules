@@ -2,6 +2,7 @@ import { useCookie } from 'nuxt/app'
 
 import type { UseToastInterface } from 'nucleify'
 import { useAtomicToast } from 'nucleify'
+
 import { usePrimeVue } from 'primevue/config'
 
 export function useInstallModule(onSuccess: () => void) {
