@@ -3,15 +3,15 @@
 if (!function_exists('getAllModules')) {
     function getAllModules(): array
     {
-        if (!is_dir(module_path())) {
+        if (!function_exists('modules_path') || !is_dir(modules_path())) {
             return [];
         }
 
         $modules = [];
 
-        foreach (glob(module_path('*'), GLOB_ONLYDIR) ?: [] as $moduleDir) {
+        foreach (glob(modules_path('*'), GLOB_ONLYDIR) ?: [] as $moduleDir) {
             $name = basename($moduleDir);
-            $config = module_config($name);
+            $config = function_exists('module_config') ? module_config($name) : [];
 
             $modules[$name] = !empty($config)
                 ? $config
