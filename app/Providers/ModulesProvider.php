@@ -8,10 +8,9 @@ use Illuminate\Support\ServiceProvider;
 
 class ModulesProvider extends ServiceProvider
 {
-    private const MODULES_PATH = 'modules';
-
     public function register(): void
     {
+        require_once base_path('modules/nuc_modules/helpers/index.php');
         $this->registerModulesProviders();
     }
 
@@ -55,7 +54,7 @@ class ModulesProvider extends ServiceProvider
 
     private function loadModulesConfig(string $module): void
     {
-        $configPath = base_path(self::MODULES_PATH . "/{$module}/config");
+        $configPath = module_path($module, 'config');
         if (File::exists($configPath)) {
             foreach (File::allFiles($configPath) as $file) {
                 $configName = $module . '.' . basename($file->getRealPath(), '.php');
@@ -70,19 +69,18 @@ class ModulesProvider extends ServiceProvider
 
     private function scanModules(callable $callback): void
     {
-        $modulePath = base_path(self::MODULES_PATH);
-        if (!File::exists($modulePath)) {
+        if (!File::exists(modules_path())) {
             return;
         }
 
-        foreach (array_filter(scandir($modulePath), fn ($m) => !in_array($m, ['.', '..'])) as $module) {
+        foreach (array_filter(scandir(modules_path()), fn ($m) => !in_array($m, ['.', '..'])) as $module) {
             $callback($module);
         }
     }
 
     private function scanModulesDirectories(string $module, array $directories, callable $callback, string $baseDir = ''): void
     {
-        $modulePath = base_path(self::MODULES_PATH . "/{$module}" . ($baseDir ? "/{$baseDir}" : ''));
+        $modulePath = module_path($module, $baseDir);
         if (!File::exists($modulePath)) {
             return;
         }

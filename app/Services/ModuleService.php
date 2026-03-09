@@ -128,15 +128,15 @@ class ModuleService
     {
         $this->defineUserData();
 
-        $configPath = base_path('modules/' . $name . '/config.json');
+        $configPath = module_path($name, 'config.json');
 
         if (!file_exists($configPath)) {
             throw new Exception("Module config file not found: {$name}");
         }
 
-        $config = json_decode(file_get_contents($configPath), true);
+        $config = module_config($name);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        if (empty($config)) {
             throw new Exception("Invalid JSON in config file: {$name}");
         }
 

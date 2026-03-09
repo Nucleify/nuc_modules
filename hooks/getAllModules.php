@@ -3,52 +3,19 @@
 if (!function_exists('getAllModules')) {
     function getAllModules(): array
     {
-        $modulesPath = __DIR__ . '/../../';
+        if (!is_dir(module_path())) {
+            return [];
+        }
+
         $modules = [];
 
-        if (!is_dir($modulesPath)) {
-            return [];
-        }
+        foreach (glob(module_path('*'), GLOB_ONLYDIR) ?: [] as $moduleDir) {
+            $name = basename($moduleDir);
+            $config = module_config($name);
 
-        $moduleDirs = glob($modulesPath . '/*', GLOB_ONLYDIR);
-
-        if ($moduleDirs === false) {
-            return [];
-        }
-
-        foreach ($moduleDirs as $moduleDir) {
-            $moduleName = basename($moduleDir);
-
-            $configFile = $moduleDir . '/config.json';
-            if (file_exists($configFile)) {
-                try {
-                    $configContent = file_get_contents($configFile);
-                    $config = json_decode($configContent, true);
-
-                    if (json_last_error() === JSON_ERROR_NONE && is_array($config)) {
-                        $modules[$moduleName] = $config;
-                    } else {
-                        $modules[$moduleName] = [
-                            'name' => $moduleName,
-                            'description' => 'Config file contains invalid JSON: ' . json_last_error_msg(),
-                        ];
-                    }
-                } catch (Exception $e) {
-                    $modules[$moduleName] = [
-                        'name' => $moduleName,
-                        'description' => 'Config file failed to load: ' . $e->getMessage(),
-                    ];
-                }
-            } else {
-                $modules[$moduleName] = [
-                    'name' => $moduleName,
-                    'description' => 'Config file does not exist',
-                ];
-            }
-        }
-
-        if (!is_array($modules)) {
-            return [];
+            $modules[$name] = !empty($config)
+                ? $config
+                : ['name' => $name, 'description' => 'Config file missing or invalid'];
         }
 
         return $modules;
