@@ -6,8 +6,8 @@
     <template #content>
       <nuc-modules-list
         :data="modules"
-        @module-toggled="refreshModules" 
-        @module-uninstalled="refreshModules" 
+        @module-toggled="refreshModules"
+        @module-uninstalled="refreshModules"
       />
     </template>
   </ad-card>

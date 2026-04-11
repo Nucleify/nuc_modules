@@ -1,10 +1,13 @@
 <template>
-  <ad-dialog 
-    v-model:visible="visible" 
+  <ad-dialog
+    v-model:visible="visible"
     :header="config.header"
     class="modules-settings-options-dialog"
   >
-    <p>Are you sure you want to {{ config.action }} <strong>{{ props.name }}</strong>?</p>
+    <p>
+      Are you sure you want to {{ config.action }}
+      <strong>{{ props.name }}</strong>?
+    </p>
     <template #footer>
       <ad-button
         label="Cancel"
@@ -15,13 +18,13 @@
         rounded
         @click="visible = false"
       />
-      <ad-button 
-        :label="config.label" 
-        :icon="config.icon" 
+      <ad-button
+        :label="config.label"
+        :icon="config.icon"
         ad-type="main"
-        text 
-        rounded 
-        @click="confirm" 
+        text
+        rounded
+        @click="confirm"
       />
     </template>
   </ad-dialog>
@@ -57,4 +60,3 @@ const confirm = () => {
   visible.value = false
 }
 </script>
-

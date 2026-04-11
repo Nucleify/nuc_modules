@@ -5,7 +5,7 @@
         <div class="modules-settings-detail-header-info">
           <nuc-cube
             :shiny="module?.enabled"
-            v-tooltip.right="module?.enabled ? 'Enabled' : 'Disabled'" 
+            v-tooltip.right="module?.enabled ? 'Enabled' : 'Disabled'"
           />
           <div>
             <h2>{{ module?.name || 'Loading...' }}</h2>
@@ -56,7 +56,10 @@
               />
             </p>
           </div>
-          <div class="modules-settings-detail-info-item" v-if="module.installed !== undefined">
+          <div
+            class="modules-settings-detail-info-item"
+            v-if="module.installed !== undefined"
+          >
             <label>Installed</label>
             <p>
               <ad-badge
@@ -65,11 +68,17 @@
               />
             </p>
           </div>
-          <div class="modules-settings-detail-info-item" v-if="module.created_at">
+          <div
+            class="modules-settings-detail-info-item"
+            v-if="module.created_at"
+          >
             <label>Created</label>
             <p>{{ formatDate(module.created_at) }}</p>
           </div>
-          <div class="modules-settings-detail-info-item" v-if="module.updated_at">
+          <div
+            class="modules-settings-detail-info-item"
+            v-if="module.updated_at"
+          >
             <label>Updated</label>
             <p>{{ formatDate(module.updated_at) }}</p>
           </div>
@@ -78,9 +87,7 @@
       <div v-else class="modules-settings-detail-error">
         <p>Module not found</p>
       </div>
-      <div class="modules-settings-detail-settings">
-        <slot />
-      </div>
+      <div class="modules-settings-detail-settings"><slot /></div>
     </template>
   </ad-card>
 
@@ -210,4 +217,3 @@ onMounted(async () => {
 <style lang="scss">
 @import '.'
 </style>
-

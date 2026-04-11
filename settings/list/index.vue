@@ -1,6 +1,6 @@
 <template>
   <div class="modules-settings-list">
-    <nuc-modules-settings-item 
+    <nuc-modules-settings-item
       v-for="module in props.data"
       v-bind="module"
       :key="module.name"

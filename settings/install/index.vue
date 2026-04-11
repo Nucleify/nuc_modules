@@ -8,14 +8,14 @@
     @click="visible = true"
   />
 
-  <Dialog 
-    v-model:visible="visible" 
-    :modal="true" 
+  <Dialog
+    v-model:visible="visible"
+    :modal="true"
     :dismissable-mask="true"
     class="install-module-dialog"
   >
     <template #default>
-      <FileUpload 
+      <FileUpload
         name="file"
         :url="apiUrl() + '/modules/install'"
         :maxFileSize="1000000"
@@ -27,7 +27,9 @@
         <template #empty>
           <span>Drag and drop files to here to upload.</span>
         </template>
-        <template #header="{ chooseCallback, uploadCallback, clearCallback, files }">
+        <template
+          #header="{ chooseCallback, uploadCallback, clearCallback, files }"
+        >
           <ad-button
             text
             ad-type="main"
@@ -46,12 +48,12 @@
           >
             <label>Upload</label>
           </ad-button>
-          <ad-button 
+          <ad-button
             severity="secondary"
-            text 
-            icon="prime:times" 
-            :disabled="!files || files.length === 0" 
-            @click="clearCallback()" 
+            text
+            icon="prime:times"
+            :disabled="!files || files.length === 0"
+            @click="clearCallback()"
           >
             <label>Clear</label>
           </ad-button>

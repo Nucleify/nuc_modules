@@ -1,5 +1,5 @@
 <template>
-  <div v-if="readmeContent" class="readme-content" v-sanitize-html="readmeContent"></div>
+  <div v-if="readmeContent" class="readme-content" v-html="readmeContent"></div>
   <div v-else-if="loading || showLoading" class="readme-loading">
     <p>Loading documentation...</p>
   </div>
@@ -59,4 +59,3 @@ watch(
 <style lang="scss">
 @import '.'
 </style>
-

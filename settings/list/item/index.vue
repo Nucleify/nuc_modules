@@ -1,15 +1,12 @@
 <template>
-  <div 
-    class="modules-settings-item"
-    :class="{ 'active': props.enabled }"
-  >
-    <a 
+  <div class="modules-settings-item" :class="{ 'active': props.enabled }">
+    <a
       class="modules-settings-item-link"
       :href="`/settings#module-${props.name}`"
     >
       <nuc-cube
         :shiny="props.enabled"
-        v-tooltip.right="props.enabled ? 'Enabled' : 'Disabled'" 
+        v-tooltip.right="props.enabled ? 'Enabled' : 'Disabled'"
       />
       <div class="modules-settings-item-container">
         <div class="modules-settings-item-info">
@@ -18,7 +15,7 @@
         </div>
       </div>
     </a>
-    <nuc-modules-item-options 
+    <nuc-modules-item-options
       v-bind="props"
       @module-toggled="emit('moduleToggled')"
       @module-uninstalled="emit('moduleUninstalled')"

@@ -6,7 +6,7 @@
     @click.stop
   >
     <template #button="{ toggleCallback }">
-      <ad-button 
+      <ad-button
         text
         rounded
         icon="prime:ellipsis-h"
@@ -17,7 +17,11 @@
     </template>
     <template #item="{ item, toggleCallback }">
       <div @click="toggleCallback">
-        <ad-icon :icon="item.icon" @click="item.command" v-tooltip.top="item.label" />
+        <ad-icon
+          :icon="item.icon"
+          @click="item.command"
+          v-tooltip.top="item.label"
+        />
       </div>
     </template>
   </SpeedDial>
