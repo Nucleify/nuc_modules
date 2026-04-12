@@ -1,9 +1,6 @@
 <template>
   <div class="modules-settings-item" :class="{ 'active': props.enabled }">
-    <a
-      class="modules-settings-item-link"
-      :href="`/settings#module-${props.name}`"
-    >
+    <a class="modules-settings-item-link" :href="settingsModuleHref">
       <nuc-cube
         :shiny="props.enabled"
         v-tooltip.right="props.enabled ? 'Enabled' : 'Disabled'"
@@ -28,8 +25,13 @@ import type { ModuleObjectInterface } from 'nucleify'
 
 import { NucModulesItemOptions } from '.'
 
+const route = useRoute()
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
+
+const settingsModuleHref = computed(
+  () => `/${route.params.lang || 'en'}/settings#module-${props.name}`
+)
 </script>
 
 <style lang="scss">

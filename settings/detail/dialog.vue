@@ -11,8 +11,6 @@
         label="Close"
         icon="prime:times"
         severity="secondary"
-        text
-        rounded
         @click="visible = false"
       />
     </template>

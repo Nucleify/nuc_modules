@@ -12,18 +12,13 @@
       <ad-button
         label="Cancel"
         icon="prime:times"
-        ad-type="secondary"
         severity="secondary"
-        text
-        rounded
         @click="visible = false"
       />
       <ad-button
         :label="config.label"
         :icon="config.icon"
-        ad-type="main"
-        text
-        rounded
+        :severity="config.severity"
         @click="confirm"
       />
     </template>

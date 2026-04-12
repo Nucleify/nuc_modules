@@ -5,24 +5,20 @@
 
   h1 {
     margin-top: 0;
-    color: $white-text-color;
   }
 
   h2 {
     margin-bottom: -0.5em;
-    color: $white-text-color;
   }
 
+  h1,
+  h2,
   h3,
   h4,
   h5,
-  h6 {
-    color: $white-text-color;
-  }
-
+  h6,
   p,
   li,
-  span,
   a {
     color: $white-text-color;
   }
@@ -32,6 +28,7 @@
     padding: 0.2em 0.4em;
     border-radius: 0.25rem;
     font-family: monospace;
+    font-size: $font-size-sm;
   }
 
   pre {

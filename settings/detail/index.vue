@@ -29,7 +29,6 @@
           <ad-button
             label="Uninstall"
             icon="prime:trash"
-            ad-type="danger"
             severity="danger"
             @click="openUninstallDialog"
           />
