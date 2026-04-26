@@ -96,6 +96,10 @@ class ModulesProvider extends ServiceProvider
     private function requireAllFiles(string $path): void
     {
         foreach (File::allFiles($path) as $file) {
+            if ($file->getExtension() !== 'php') {
+                continue;
+            }
+
             if (function_exists('require_once_override')) {
                 require_once_override($file->getRealPath());
             } else {
