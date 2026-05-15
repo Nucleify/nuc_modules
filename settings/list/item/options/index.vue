@@ -37,13 +37,15 @@
 
 <script setup lang="ts">
 import type { ModuleObjectInterface } from 'nucleify'
-import { toggleModule, uninstallModule } from 'nucleify'
+import { installModule, toggleModule, uninstallModule } from 'nucleify'
 
 import { type ModuleDialogAction, NucModulesItemOptionsDialog } from '.'
 
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
 const router = useRouter()
+const route = useRoute()
+const locale = computed(() => String(route.params.lang || 'en'))
 
 const dialogVisible = ref(false)
 const currentAction = ref<ModuleDialogAction>('uninstall')
@@ -53,9 +55,15 @@ const openDialog = (action: ModuleDialogAction) => {
   dialogVisible.value = true
 }
 
-const confirmAction = () => {
-  if (currentAction.value === 'uninstall') {
-    uninstallModule(props.name, () => emit('moduleUninstalled'))
+const confirmAction = (options?: { deleteModuleFiles?: boolean }) => {
+  if (currentAction.value === 'install') {
+    installModule(props.name, () => emit('moduleUninstalled'))
+  } else if (currentAction.value === 'uninstall') {
+    uninstallModule(
+      props.name,
+      () => emit('moduleUninstalled'),
+      options?.deleteModuleFiles === true
+    )
   } else {
     toggleModule(props.name, props.enabled, () => emit('moduleToggled'))
   }
@@ -66,7 +74,7 @@ const items = computed(() => [
     label: 'Show',
     icon: 'prime:info-circle',
     command: () => {
-      router.push(`/settings#module-${props.name}`)
+      router.push(`/${locale.value}/settings#module-${props.name}`)
     },
   },
   {
@@ -75,9 +83,9 @@ const items = computed(() => [
     command: () => openDialog('toggle'),
   },
   {
-    label: 'Uninstall',
-    icon: 'prime:trash',
-    command: () => openDialog('uninstall'),
+    label: props.installed ? 'Uninstall' : 'Install',
+    icon: props.installed ? 'prime:trash' : 'prime:download',
+    command: () => openDialog(props.installed ? 'uninstall' : 'install'),
   },
 ])
 </script>

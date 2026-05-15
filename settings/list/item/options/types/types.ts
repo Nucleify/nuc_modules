@@ -1,1 +1,1 @@
-export type ModuleDialogAction = 'uninstall' | 'toggle'
+export type ModuleDialogAction = 'install' | 'uninstall' | 'toggle'

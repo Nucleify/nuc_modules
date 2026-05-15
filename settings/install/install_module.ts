@@ -1,10 +1,9 @@
 import type { UseToastInterface } from 'nucleify'
 import { apiHandle, useAtomicToast } from 'nucleify'
 
-export async function uninstallModule(
+export async function installModule(
   name: string,
-  onSuccess: () => void,
-  deleteModuleFiles = false
+  onSuccess: () => void
 ): Promise<void> {
   const { flashToast }: UseToastInterface = useAtomicToast()
 
@@ -14,11 +13,11 @@ export async function uninstallModule(
   }
 
   await apiHandle({
-    url: apiUrl() + '/modules/uninstall',
+    url: apiUrl() + '/modules/install',
     method: 'POST',
-    data: { name: name, deleteModuleFiles: deleteModuleFiles === true },
+    data: { name },
     onSuccess: () => {
-      flashToast(`Module "${name}" uninstalled successfully`, 'success')
+      flashToast(`Module "${name}" installed successfully`, 'success')
       onSuccess()
     },
   })
