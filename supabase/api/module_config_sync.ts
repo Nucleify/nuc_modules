@@ -1,5 +1,6 @@
 import { access, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
+
 import { fileURLToPath } from 'node:url'
 import { assertSafeModuleName } from './module_install_disk'
 
@@ -33,10 +34,6 @@ async function resolveExistingConfigPath(
   return null
 }
 
-/**
- * Persists `enabled` into `modules/<name>/config.json` (same source as merge-seeder).
- * Fails if the file is missing or not writable — keeps DB and repo in sync when it succeeds.
- */
 export async function syncModuleConfigEnabled(
   moduleName: string,
   enabled: boolean
@@ -59,9 +56,6 @@ export async function syncModuleConfigEnabled(
   await writeFile(path, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8')
 }
 
-/**
- * Uninstall: mark module off in repo config (same fields as `config.json` → seeder merge).
- */
 export async function syncModuleConfigUninstall(
   moduleName: string
 ): Promise<void> {
@@ -84,7 +78,6 @@ export async function syncModuleConfigUninstall(
   await writeFile(path, `${JSON.stringify(parsed, null, 2)}\n`, 'utf8')
 }
 
-/** Re-register bundled module in repo config after uninstall. */
 export async function syncModuleConfigInstall(
   moduleName: string
 ): Promise<void> {

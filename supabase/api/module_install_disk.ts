@@ -1,8 +1,8 @@
 import { access, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve, sep } from 'node:path'
+
 import { fileURLToPath } from 'node:url'
 
-/** Same rule as `module_config_sync` — katalog modułu = `nuc_*`. */
 export const SAFE_MODULE_NAME_REGEX = /^nuc_[a-z0-9_]+$/
 
 export function assertSafeModuleName(moduleName: string): void {
@@ -11,13 +11,8 @@ export function assertSafeModuleName(moduleName: string): void {
   }
 }
 
-/**
- * Katalog `modules/` w repo (zawiera `nuc_*`), nie pojedynczy moduł.
- * Próbuje cwd jak przy `nuxt dev` z `nuxt/` oraz ścieżkę względem tego pliku.
- */
 export async function resolveRepoModulesParentDir(): Promise<string> {
   const cwd = process.cwd()
-  /** Zgodnie z `module_config_sync`: 4× `..` z `supabase/api/` → root repo, potem `modules/`. */
   const fromThisFile = join(
     dirname(fileURLToPath(import.meta.url)),
     '../../../..',
@@ -41,7 +36,6 @@ export async function resolveRepoModulesParentDir(): Promise<string> {
   )
 }
 
-/** Ochrona przed path traversal — `candidate` musi leżeć wewnątrz `dir`. */
 export function isResolvedPathInsideDir(
   dir: string,
   candidate: string
@@ -51,9 +45,6 @@ export function isResolvedPathInsideDir(
   return c === d || c.startsWith(d + sep)
 }
 
-/**
- * Usuwa katalog `modules/<moduleName>/` z dysku (np. po odinstalowaniu z zaznaczonym checkboxem).
- */
 export async function deleteModuleDirectory(moduleName: string): Promise<void> {
   assertSafeModuleName(moduleName)
   const modulesParent = await resolveRepoModulesParentDir()
@@ -98,7 +89,6 @@ const DEFAULT_CONFIG = (name: string) =>
     enabled: true,
   }) as const
 
-/** Jeśli w katalogu modułu nie ma `config.json`, tworzy prosty plik domyślny. */
 export async function ensureDefaultModuleConfigJson(
   moduleDir: string,
   moduleName: string

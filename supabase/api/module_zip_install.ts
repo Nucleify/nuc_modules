@@ -1,11 +1,12 @@
-import type { H3Event } from 'h3'
-import { readMultipartFormData } from 'h3'
-
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { unzipSync } from 'fflate'
-import type { ApiHandlerResult } from '../../../../nuxt/server/api/_types'
+import type { H3Event } from 'h3'
+import { readMultipartFormData } from 'h3'
+
+import type { ApiHandlerResult } from 'nuc_server'
+
 import { syncModuleConfigInstall } from './module_config_sync'
 import {
   assertSafeModuleName,
@@ -94,11 +95,6 @@ export async function upsertModuleRow(
   return data as Record<string, unknown>
 }
 
-/**
- * POST multipart (PrimeVue FileUpload): ZIP musi mieć ten sam stem co plik wejścia modułu,
- * np. `nuc_test.zip` → w archiwum `nuc_test.ts` (root) albo `nuc_test/nuc_test.ts`.
- * Zapis do `modules/<stem>/`, brak `config.json` → prosty domyślny, potem wiersz w `public.modules`.
- */
 export async function handleModuleZipInstall(
   event: H3Event,
   supabase: SupabaseClient

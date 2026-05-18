@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
+import { dirname, join } from 'node:path'
+
 /**
  * Scans every subdirectory of `modules` for `config.json` and rewrites the nuc_modules SQL seeder.
  * Invoked from merge-module-supabase-sql.sh before merging seeders.
  */
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
