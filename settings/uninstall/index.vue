@@ -10,14 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import type { NucModulesUninstallModuleInterface } from '.'
-import { uninstallModule } from '.'
+import { moduleRequests } from 'nucleify'
+import type { NucModulesUninstallModuleInterface } from 'nucleify'
 
 const props = defineProps<NucModulesUninstallModuleInterface>()
 
 const emit = defineEmits<{
   moduleUninstalled: []
 }>()
+
+const { uninstallModule } = moduleRequests()
 </script>
 
 <style lang="scss">

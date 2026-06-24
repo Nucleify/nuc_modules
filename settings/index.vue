@@ -15,15 +15,17 @@
 
 <script setup lang="ts">
 import type { ModuleObjectInterface } from 'nucleify'
-import { apiRequest } from 'nucleify'
-
-import { NucModulesList, NucModulesSettingsInstallModule } from '.'
+import {
+  apiRequest,
+  NucModulesList,
+  NucModulesSettingsInstallModule,
+} from 'nucleify'
 
 const modules = ref<ModuleObjectInterface[]>([])
 
 async function loadModules(): Promise<void> {
   const response = await apiRequest<{ modules: ModuleObjectInterface[] }>(
-    apiUrl() + '/modules/all'
+    '/modules/all'
   )
 
   if (response.modules) {

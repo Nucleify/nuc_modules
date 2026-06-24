@@ -1,7 +1,9 @@
+import 'server-only'
+
 import { access, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
-
 import { fileURLToPath } from 'node:url'
+
 import { assertSafeModuleName } from './module_install_disk'
 
 function candidateConfigPaths(moduleName: string): string[] {

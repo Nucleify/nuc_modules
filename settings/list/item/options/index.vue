@@ -36,16 +36,21 @@
 </template>
 
 <script setup lang="ts">
-import type { ModuleObjectInterface } from 'nucleify'
-import { installModule, toggleModule, uninstallModule } from 'nucleify'
-
-import { type ModuleDialogAction, NucModulesItemOptionsDialog } from '.'
+import {
+  moduleRequests,
+  ModuleDialogAction,
+  NucModulesItemOptionsDialog,
+  ModuleObjectInterface,
+} from 'nucleify'
 
 const props = defineProps<ModuleObjectInterface>()
 const emit = defineEmits(['moduleToggled', 'moduleUninstalled'])
-const router = useRouter()
+
 const route = useRoute()
+const router = useRouter()
 const locale = computed(() => String(route.params.lang || 'en'))
+
+const { installModule, toggleModule, uninstallModule } = moduleRequests()
 
 const dialogVisible = ref(false)
 const currentAction = ref<ModuleDialogAction>('uninstall')
@@ -91,5 +96,5 @@ const items = computed(() => [
 </script>
 
 <style lang="scss">
-@import '.'
+@import 'index'
 </style>

@@ -3,6 +3,7 @@ import { when } from 'nuc_api'
 
 import {
   handleGetModule,
+  handleGetModuleReadme,
   handleInstallModule,
   handleListModules,
   handleToggleModule,
@@ -13,6 +14,12 @@ import {
 export const routeListModules = when(
   { method: 'GET', path: [undefined, 'all'] },
   handleListModules
+)
+
+/** GET /modules/:name/README.md */
+export const routeGetModuleReadme = when(
+  { method: 'GET', path: [undefined, undefined, 'README.md'] },
+  handleGetModuleReadme
 )
 
 /** GET /modules/:name */
@@ -38,6 +45,7 @@ export const routeUninstallModule = when(
 
 export const modulesRoutes: ApiRoute[] = [
   routeListModules,
+  routeGetModuleReadme,
   routeGetModule,
   routeToggleModule,
   routeInstallModule,

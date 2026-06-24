@@ -154,7 +154,7 @@ export async function handleModuleZipInstall(
       handled: true,
       status: 400,
       body: {
-        error: `Zip "${filePart.filename}" must contain ${stem}.ts at archive root or ${stem}/${stem}.ts (same basename as the zip, Laravel-style).`,
+        error: `Zip "${filePart.filename}" must contain ${stem}.ts at archive root or ${stem}/${stem}.ts (same basename as the zip).`,
       },
     }
   }

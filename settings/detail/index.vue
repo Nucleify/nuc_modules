@@ -118,13 +118,17 @@ import { useRoute, useRouter } from 'nuxt/app'
 import { computed, onMounted, ref, watch } from 'vue'
 
 import type { ModuleObjectInterface } from 'nucleify'
-import { apiRequest, toggleModule, uninstallModule } from 'nucleify'
-
-import { NucModulesItemOptionsDialog } from '../list/item/options'
-import NucModulesSettingsDetailReadmeDialog from './dialog.vue'
+import {
+  apiRequest,
+  moduleRequests,
+  NucModulesItemOptionsDialog,
+  NucModulesSettingsDetailReadmeDialog,
+} from 'nucleify'
 
 const route = useRoute()
 const router = useRouter()
+
+const { toggleModule, uninstallModule } = moduleRequests()
 
 const moduleData = ref<ModuleObjectInterface | null>(null)
 const loading = ref(true)
@@ -149,7 +153,7 @@ async function loadModule(): Promise<void> {
   try {
     loading.value = true
     const response = await apiRequest<ModuleObjectInterface>(
-      apiUrl() + '/modules/' + moduleName.value
+      '/modules/' + moduleName.value
     )
 
     const data = 'data' in response ? response.data : response
@@ -184,12 +188,18 @@ async function handleToggle(): Promise<void> {
   })
 }
 
-async function handleUninstall(): Promise<void> {
+async function handleUninstall(options?: {
+  deleteModuleFiles?: boolean
+}): Promise<void> {
   if (!module.value) return
 
-  await uninstallModule(module.value.name, async () => {
-    router.push('/settings#modules')
-  })
+  await uninstallModule(
+    module.value.name,
+    async () => {
+      router.push('/settings#modules')
+    },
+    options?.deleteModuleFiles === true
+  )
 }
 
 function formatDate(dateString: string): string {
@@ -214,5 +224,5 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
-@import '.'
+@import 'index'
 </style>

@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import { NucModulesSettings, NucModulesSettingsDetail } from '.'
+import { NucModulesSettings, NucModulesSettingsDetail } from 'nucleify'
 
 export function registerNucModules(app: App<Element>): void {
   app

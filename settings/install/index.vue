@@ -17,7 +17,7 @@
     <template #default>
       <FileUpload
         name="file"
-        :url="apiUrl() + '/modules/install'"
+        :url="'/api/modules/install'"
         :maxFileSize="1000000"
         :withCredentials="true"
         @before-upload="beforeUpload"
@@ -70,7 +70,9 @@
 </template>
 
 <script setup lang="ts">
-import { useInstallModule } from '.'
+import { ref } from 'vue'
+
+import { useInstallModule } from 'nucleify'
 
 const visible = ref(false)
 

@@ -1,3 +1,4 @@
+import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getRequestHeader } from 'h3'
 
@@ -20,10 +21,12 @@ import {
   syncModuleConfigUninstall,
 } from './module_config_sync'
 import {
-  assertModuleBootstrapTsExists,
+  assertSafeModuleName,
   deleteModuleDirectory,
   ensureDefaultModuleConfigJson,
+  isResolvedPathInsideDir,
   readModuleConfigMeta,
+  resolveModuleDirOnDisk,
   resolveRepoModulesParentDir,
 } from './module_install_disk'
 import { isModuleDiskSyncEnabled } from './module_install_env'
@@ -45,6 +48,7 @@ export async function handleGetModule(
 ): Promise<ApiHandlerResult | null> {
   const name = seg(ctx, 1)
   if (!name || ctx.segments.length < 2 || RESERVED.has(name)) return null
+  if (seg(ctx, 2) === 'README.md') return null
 
   const { data, error } = await ctx.supabase
     .from('modules')
@@ -53,6 +57,29 @@ export async function handleGetModule(
     .maybeSingle()
   if (error) return fromSupabaseError(error)
   return data ? apiOk(ctx, data) : apiError(404, 'Module not found')
+}
+
+export async function handleGetModuleReadme(
+  ctx: ApiContext
+): Promise<ApiHandlerResult | null> {
+  const name = seg(ctx, 1)
+  if (!name || seg(ctx, 2) !== 'README.md' || RESERVED.has(name)) return null
+
+  try {
+    assertSafeModuleName(name)
+    const parent = await resolveRepoModulesParentDir()
+    const readmePath = join(parent, name, 'README.md')
+    if (!isResolvedPathInsideDir(parent, readmePath)) {
+      return apiError(400, 'Invalid module path')
+    }
+    const content = await readFile(readmePath, 'utf-8')
+    return apiOk(ctx, content)
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException)?.code === 'ENOENT') {
+      return apiError(404, 'README not found')
+    }
+    return fromThrown(e, 500, 'Failed to read README')
+  }
 }
 
 export async function handleToggleModule(
@@ -185,18 +212,17 @@ async function readInstallMetaFromDisk(
   name: string
 ): Promise<ModuleMeta | ApiHandlerResult> {
   try {
-    await assertModuleBootstrapTsExists(name)
-    const parent = await resolveRepoModulesParentDir()
-    const moduleDir = join(parent, name)
+    const moduleDir = await resolveModuleDirOnDisk(name)
     await ensureDefaultModuleConfigJson(moduleDir, name)
     return await readModuleConfigMeta(moduleDir, name)
   } catch (e) {
-    const bootstrap = e instanceof Error && e.message.includes('bootstrap')
+    const missingOnDisk =
+      e instanceof Error && e.message.includes('not found on disk')
     return fromThrown(
       e,
       400,
-      bootstrap
-        ? 'Module bootstrap file missing (modules/<name>/<name>.ts).'
+      missingOnDisk
+        ? `Module "${name}" is not present under modules/ (missing config.json).`
         : 'Failed to ensure module config.json on disk.'
     )
   }

@@ -1,4 +1,3 @@
-
 #settings .modules-settings-card {
   height: 100%;
   width: 100%;
@@ -9,12 +8,14 @@
     padding: 1em;
   }
 
-  .p-card-body {
+  .p-card-body,
+  .ad-card-body {
     height: 100%;
     padding: .125em 1em 1em;
     overflow-y: scroll;
 
-    .p-card-content {
+    .p-card-content,
+    .ad-card-content {
       height: unset !important;
       display: flex;
       flex-direction: column !important;
@@ -23,10 +24,12 @@
   }
 
   @media (width > $md) {
-    .p-card-body {
+    .p-card-body,
+    .ad-card-body {
       height: 100% !important;
 
-      .p-card-content {
+      .p-card-content,
+      .ad-card-content {
         height: 100% !important;
       }
     }

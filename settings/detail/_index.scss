@@ -1,12 +1,13 @@
-
 #settings .panel-container .modules-settings-detail-card {
   height: 100%;
   padding: 1rem;
 
-  .p-card-body {
+  .p-card-body,
+  .ad-card-body {
     padding: 0 !important;
-    
-    .p-card-content {
+
+    .p-card-content,
+    .ad-card-content {
       flex-direction: column !important;
     }
   }

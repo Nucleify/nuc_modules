@@ -22,8 +22,7 @@
 
 <script setup lang="ts">
 import type { ModuleObjectInterface } from 'nucleify'
-
-import { NucModulesItemOptions } from '.'
+import { NucModulesItemOptions } from 'nucleify'
 
 const route = useRoute()
 const props = defineProps<ModuleObjectInterface>()

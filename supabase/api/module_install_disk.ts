@@ -1,6 +1,5 @@
 import { access, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve, sep } from 'node:path'
-
 import { fileURLToPath } from 'node:url'
 
 export const SAFE_MODULE_NAME_REGEX = /^nuc_[a-z0-9_]+$/
@@ -64,6 +63,47 @@ export function moduleBootstrapTsPath(
   return resolve(join(modulesParent, moduleName, `${moduleName}.ts`))
 }
 
+export function moduleConfigJsonPath(
+  modulesParent: string,
+  moduleName: string
+): string {
+  return resolve(join(modulesParent, moduleName, 'config.json'))
+}
+
+export async function resolveModuleDirOnDisk(
+  moduleName: string
+): Promise<string> {
+  assertSafeModuleName(moduleName)
+  const parent = await resolveRepoModulesParentDir()
+  const moduleDir = resolve(join(parent, moduleName))
+  const configPath = moduleConfigJsonPath(parent, moduleName)
+
+  try {
+    await access(configPath)
+    if (!isResolvedPathInsideDir(parent, moduleDir)) {
+      throw new Error(
+        `Refusing to use module path outside modules directory (${moduleName}).`
+      )
+    }
+    return moduleDir
+  } catch {
+    try {
+      await access(moduleDir)
+      if (!isResolvedPathInsideDir(parent, moduleDir)) {
+        throw new Error(
+          `Refusing to use module path outside modules directory (${moduleName}).`
+        )
+      }
+      return moduleDir
+    } catch {
+      throw new Error(
+        `Module not found on disk: modules/${moduleName}/ (expected config.json or module directory).`
+      )
+    }
+  }
+}
+
+/** @deprecated ZIP uploads may still require a bootstrap .ts; JSON install uses config.json. */
 export async function assertModuleBootstrapTsExists(
   moduleName: string
 ): Promise<void> {
@@ -74,7 +114,7 @@ export async function assertModuleBootstrapTsExists(
     await access(entry)
   } catch {
     throw new Error(
-      `Missing bootstrap file (expected same stem as module, like Laravel): modules/${moduleName}/${moduleName}.ts`
+      `Missing bootstrap file: modules/${moduleName}/${moduleName}.ts`
     )
   }
 }

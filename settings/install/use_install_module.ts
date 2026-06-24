@@ -1,26 +1,54 @@
-import { useCookie } from 'nuxt/app'
+'use client'
 
-import type { UseToastInterface } from 'nucleify'
-import { useAtomicToast } from 'nucleify'
+import { flashToast } from 'nucleify'
 
-import { usePrimeVue } from 'primevue/config'
+function getXsrfToken(): string | undefined {
+  if (typeof document === 'undefined') return undefined
+
+  const match = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/)
+  return match ? decodeURIComponent(match[1]) : undefined
+}
+
+function parseXhrErrorMessage(xhr: XMLHttpRequest): string {
+  try {
+    const data = JSON.parse(xhr.responseText) as {
+      error?: string
+      errors?: string
+      message?: string
+    }
+    return (
+      data.error ||
+      data.errors ||
+      data.message ||
+      xhr.statusText ||
+      'Failed to install module'
+    )
+  } catch {
+    return xhr.statusText || 'Failed to install module'
+  }
+}
+
+export function formatModuleUploadSize(bytes: number): string {
+  const k = 1024
+  const sizes = ['B', 'KB', 'MB', 'GB']
+  if (bytes === 0) return `0 ${sizes[0]}`
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`
+}
 
 export function useInstallModule(onSuccess: () => void) {
-  const $primevue = usePrimeVue()
-  const { flashToast }: UseToastInterface = useAtomicToast()
-
-  // biome-ignore lint/suspicious/noExplicitAny: fix it later
-  function beforeUpload(event: any) {
+  // biome-ignore lint/suspicious/noExplicitAny: PrimeVue/PrimeReact FileUpload xhr event
+  function onBeforeUpload(event: any) {
     try {
-      const xsrfToken = useCookie('XSRF-TOKEN')
+      const xsrfToken = getXsrfToken()
 
       const headers: Record<string, string> = {
         Accept: 'application/json',
         'Referer-Slug': window.location.pathname,
       }
 
-      if (xsrfToken.value) {
-        headers['X-XSRF-TOKEN'] = xsrfToken.value
+      if (xsrfToken) {
+        headers['X-XSRF-TOKEN'] = xsrfToken
       }
 
       const originalOpen = event.xhr.open
@@ -48,40 +76,38 @@ export function useInstallModule(onSuccess: () => void) {
       }
 
       return event
-    } catch (error) {
+    } catch {
       flashToast('Error preparing upload', 'error')
       return false
     }
   }
 
-  function onUpload(): void {
+  // biome-ignore lint/suspicious/noExplicitAny: PrimeVue/PrimeReact FileUpload xhr event
+  function onUpload(event?: any): void {
+    const xhr = event?.xhr as XMLHttpRequest | undefined
+    if (xhr && xhr.status >= 400) {
+      flashToast(parseXhrErrorMessage(xhr), 'error')
+      return
+    }
+
     flashToast('Module installed successfully', 'success')
     onSuccess()
   }
 
-  function onError(): void {
-    flashToast('Failed to install module', 'error')
-  }
-
-  function formatSize(bytes: number): string {
-    const k = 1024
-    const nuc = 4
-    const sizes = $primevue.config.locale?.fileSizeTypes
-
-    if (bytes === 0) {
-      return `0 ${sizes?.[0]}`
-    }
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k))
-    const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(nuc))
-
-    return `${formattedSize} ${sizes?.[i]}`
+  // biome-ignore lint/suspicious/noExplicitAny: PrimeVue/PrimeReact FileUpload xhr event
+  function onError(event?: any): void {
+    const xhr = event?.xhr as XMLHttpRequest | undefined
+    flashToast(
+      xhr ? parseXhrErrorMessage(xhr) : 'Failed to install module',
+      'error'
+    )
   }
 
   return {
-    beforeUpload,
+    onBeforeUpload,
+    beforeUpload: onBeforeUpload,
     onUpload,
     onError,
-    formatSize,
+    formatSize: formatModuleUploadSize,
   }
 }

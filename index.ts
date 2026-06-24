@@ -1,15 +1,24 @@
-/**
- *  Module's main file export
- */
 export * from './nuc_modules'
 
-/**
- *  Folders exports
- */
-export * from './atomic'
-export * from './settings'
-export * from './utils'
-
-/**
- *  File exports
- */
+export * from './atomic/bosons/types/api/interfaces'
+export * from './atomic/bosons/types/object/interfaces'
+export * from './atomic/bosons/utils/api/requests'
+export * from './atomic/bosons/utils/load_readme'
+export { default as NucModulesReadme } from './atomic/templates/readme/index.vue'
+export * from './atomic/templates/readme/interfaces'
+export { default as NucModulesSettingsDetail } from './settings/detail/index.vue'
+export * from './settings/dialog/interfaces'
+export { default as NucModulesItemOptionsDialog } from './settings/dialog/item-options/index.vue'
+export { default as NucModulesSettingsDetailReadmeDialog } from './settings/dialog/readme/index.vue'
+export * from './settings/dialog/types/interfaces'
+export * from './settings/dialog/types/variables'
+export { default as NucModulesSettings } from './settings/index.vue'
+export { default as NucModulesSettingsInstallModule } from './settings/install/index.vue'
+export * from './settings/install/interfaces'
+export * from './settings/install/use_install_module'
+export { default as NucModulesList } from './settings/list/index.vue'
+export * from './settings/list/interfaces'
+export { default as NucModulesSettingsItem } from './settings/list/item/index.vue'
+export { default as NucModulesItemOptions } from './settings/list/item/options/index.vue'
+export { default as NucModulesSettingsUninstallModule } from './settings/uninstall/index.vue'
+export * from './settings/uninstall/interfaces'
