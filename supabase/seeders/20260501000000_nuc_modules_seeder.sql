@@ -67,7 +67,7 @@ $registry$[
     "name": "nuc_activity",
     "description": "Module that contains Nucleify's activity functions.",
     "category": "core",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "enabled": true,
     "installed": true
   },
@@ -75,7 +75,7 @@ $registry$[
     "name": "nuc_admin",
     "description": "Module that contains admin functions.",
     "category": "core",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "enabled": true,
     "installed": true
   },
@@ -83,7 +83,7 @@ $registry$[
     "name": "nuc_animations",
     "description": "Module that contains animation functions.",
     "category": "core",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "enabled": true,
     "installed": true
   },
@@ -91,7 +91,7 @@ $registry$[
     "name": "nuc_api",
     "description": "Module that contains API functions.",
     "category": "core",
-    "version": "0.3.1",
+    "version": "0.5.0",
     "enabled": true,
     "installed": true
   },
@@ -99,7 +99,7 @@ $registry$[
     "name": "nuc_auth",
     "description": "Module that contains auth functions.",
     "category": "core",
-    "version": "0.6.0",
+    "version": "0.8.0",
     "enabled": true,
     "installed": true
   },
@@ -107,7 +107,7 @@ $registry$[
     "name": "nuc_breadcrumb",
     "description": "Module that contains breadcrumb functionality.",
     "category": "core",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "enabled": true,
     "installed": true
   },
@@ -115,7 +115,7 @@ $registry$[
     "name": "nuc_calendar",
     "description": "Calendar, meetings, and appointment booking with month/week/day views.",
     "category": "feature",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "enabled": true,
     "installed": true
   },
@@ -123,7 +123,7 @@ $registry$[
     "name": "nuc_charts",
     "description": "Module that contains chart functions.",
     "category": "core",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "enabled": true,
     "installed": true
   },
@@ -131,7 +131,7 @@ $registry$[
     "name": "nuc_colors",
     "description": "Module that contains color functions.",
     "category": "core",
-    "version": "1.3.1",
+    "version": "1.5.0",
     "enabled": true,
     "installed": true
   },
@@ -139,7 +139,7 @@ $registry$[
     "name": "nuc_dark_mode",
     "description": "Module that contains dark mode functions.",
     "category": "core",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "enabled": true,
     "installed": true
   },
@@ -147,7 +147,7 @@ $registry$[
     "name": "nuc_database",
     "description": "Module that manages database seeding with auto-discovery.",
     "category": "core",
-    "version": "0.1.2",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -155,7 +155,7 @@ $registry$[
     "name": "nuc_datatable",
     "description": "Module that contains datatable functions.",
     "category": "core",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "enabled": true,
     "installed": true
   },
@@ -163,7 +163,7 @@ $registry$[
     "name": "nuc_dialog",
     "description": "Module that contains dialog functionality.",
     "category": "core",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "enabled": true,
     "installed": true
   },
@@ -171,7 +171,7 @@ $registry$[
     "name": "nuc_dock",
     "description": "Module that contains dock functionality.",
     "category": "core",
-    "version": "0.6.0",
+    "version": "0.9.0",
     "enabled": true,
     "installed": true
   },
@@ -179,7 +179,7 @@ $registry$[
     "name": "nuc_documentation",
     "description": "Module that contains documentation functions.",
     "category": "core",
-    "version": "1.1.1",
+    "version": "1.3.0",
     "enabled": true,
     "installed": true
   },
@@ -187,7 +187,7 @@ $registry$[
     "name": "nuc_documents",
     "description": "Module that contains convert document functions.",
     "category": "core",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -195,7 +195,7 @@ $registry$[
     "name": "nuc_entities",
     "description": "Module that contains entity functions.",
     "category": "core",
-    "version": "0.9.0",
+    "version": "0.11.0",
     "enabled": true,
     "installed": true
   },
@@ -203,7 +203,7 @@ $registry$[
     "name": "nuc_entities_structural",
     "description": "Module that contains structural entity functions.",
     "category": "core",
-    "version": "0.6.0",
+    "version": "0.8.0",
     "enabled": true,
     "installed": true
   },
@@ -211,7 +211,7 @@ $registry$[
     "name": "nuc_fields",
     "description": "Module that contains field functions.",
     "category": "core",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "enabled": true,
     "installed": true
   },
@@ -219,7 +219,7 @@ $registry$[
     "name": "nuc_files",
     "description": "Module that contains file functions.",
     "category": "core",
-    "version": "0.4.0",
+    "version": "0.6.0",
     "enabled": true,
     "installed": true
   },
@@ -227,7 +227,7 @@ $registry$[
     "name": "nuc_friendship",
     "description": "Module that contains friendship functions.",
     "category": "core",
-    "version": "0.5.0",
+    "version": "0.8.0",
     "enabled": true,
     "installed": true
   },
@@ -235,7 +235,7 @@ $registry$[
     "name": "nuc_globals",
     "description": "Module that contains global functions, constants, etc.",
     "category": "core",
-    "version": "0.4.1",
+    "version": "0.6.0",
     "enabled": true,
     "installed": true
   },
@@ -243,7 +243,7 @@ $registry$[
     "name": "nuc_languages",
     "description": "Module that contains i18n functions.",
     "category": "core",
-    "version": "0.8.0",
+    "version": "0.10.0",
     "enabled": true,
     "installed": true
   },
@@ -251,7 +251,7 @@ $registry$[
     "name": "nuc_loading",
     "description": "Module that contains loading functions.",
     "category": "core",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -259,7 +259,7 @@ $registry$[
     "name": "nuc_media",
     "description": "Module that contains media functions.",
     "category": "core",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -267,7 +267,7 @@ $registry$[
     "name": "nuc_modules",
     "description": "Module that manages the modules of the application.",
     "category": "core",
-    "version": "1.0.0",
+    "version": "1.3.0",
     "enabled": true,
     "installed": true
   },
@@ -275,7 +275,7 @@ $registry$[
     "name": "nuc_navigation",
     "description": "Module that contains navigation functions.",
     "category": "core",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -283,7 +283,7 @@ $registry$[
     "name": "nuc_openapi",
     "description": "Module that contains OpenAPI 3.0 specification generation",
     "category": "api",
-    "version": "0.0.2",
+    "version": "0.2.0",
     "enabled": true,
     "installed": true
   },
@@ -291,7 +291,7 @@ $registry$[
     "name": "nuc_overrides",
     "description": "Module for overriding files for Nucleify",
     "category": "other",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "enabled": true,
     "installed": true
   },
@@ -299,7 +299,7 @@ $registry$[
     "name": "nuc_pagebuilder",
     "description": "Module that provides elementor-like page builder with database persistence.",
     "category": "core",
-    "version": "0.5.0",
+    "version": "0.7.0",
     "enabled": true,
     "installed": true
   },
@@ -307,7 +307,7 @@ $registry$[
     "name": "nuc_pages",
     "description": "Module that contains page functions.",
     "category": "core",
-    "version": "0.9.1",
+    "version": "0.11.0",
     "enabled": true,
     "installed": true
   },
@@ -315,7 +315,7 @@ $registry$[
     "name": "nuc_pricings",
     "description": "Module for pricing sections and payment links.",
     "category": "core",
-    "version": "0.5.1",
+    "version": "0.7.0",
     "enabled": true,
     "installed": true
   },
@@ -323,7 +323,7 @@ $registry$[
     "name": "nuc_screen_loader",
     "description": "Module that contains screen loader functions.",
     "category": "core",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -331,7 +331,7 @@ $registry$[
     "name": "nuc_sections",
     "description": "Module that contains section functions.",
     "category": "core",
-    "version": "1.1.1",
+    "version": "1.3.0",
     "enabled": true,
     "installed": true
   },
@@ -339,7 +339,7 @@ $registry$[
     "name": "nuc_settings",
     "description": "Module that contains settings functions.",
     "category": "core",
-    "version": "0.5.0",
+    "version": "0.7.0",
     "enabled": true,
     "installed": true
   },
@@ -347,7 +347,7 @@ $registry$[
     "name": "nuc_share",
     "description": "Module that contains entity sharing functions.",
     "category": "core",
-    "version": "0.6.0",
+    "version": "0.8.0",
     "enabled": true,
     "installed": true
   },
@@ -355,7 +355,7 @@ $registry$[
     "name": "nuc_socials",
     "description": "Module that displays social media links.",
     "category": "social",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "enabled": true,
     "installed": true
   },
@@ -363,7 +363,7 @@ $registry$[
     "name": "nuc_stores",
     "description": "Module that contains store functions.",
     "category": "core",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "enabled": true,
     "installed": true
   },
@@ -371,7 +371,7 @@ $registry$[
     "name": "nuc_templates",
     "description": "Module that contains template functions.",
     "category": "core",
-    "version": "0.8.0",
+    "version": "0.10.0",
     "enabled": true,
     "installed": true
   },
@@ -379,7 +379,7 @@ $registry$[
     "name": "nuc_terminal",
     "description": "Module that contains terminal functions.",
     "category": "core",
-    "version": "0.4.0",
+    "version": "0.7.0",
     "enabled": true,
     "installed": true
   },
@@ -387,7 +387,7 @@ $registry$[
     "name": "nuc_tooltip",
     "description": "Module that contains tooltip functions.",
     "category": "core",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "enabled": true,
     "installed": true
   },
@@ -395,7 +395,7 @@ $registry$[
     "name": "nuc_users",
     "description": "Module that contains user domain logic and user settings.",
     "category": "core",
-    "version": "0.5.0",
+    "version": "0.7.0",
     "enabled": true,
     "installed": true
   }

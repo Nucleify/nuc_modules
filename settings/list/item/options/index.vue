@@ -10,7 +10,7 @@
         text
         rounded
         icon="prime:ellipsis-h"
-        :ad-type="props.enabled && 'main'"
+        :nui-type="props.enabled && 'main'"
         :severity="!props.enabled && 'secondary'"
         @click="toggleCallback"
       />

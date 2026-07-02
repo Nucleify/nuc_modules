@@ -13,7 +13,7 @@ export default function NucModulesSettingsUninstallModule({
 
   return (
     <AdButton
-      adType="main"
+      nuiType="main"
       text
       rounded
       icon="prime:trash"

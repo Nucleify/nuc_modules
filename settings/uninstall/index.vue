@@ -1,6 +1,6 @@
 <template>
   <ad-button
-    ad-type="main"
+    nui-type="main"
     text
     rounded
     icon="prime:trash"

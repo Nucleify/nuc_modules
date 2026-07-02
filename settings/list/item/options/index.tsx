@@ -158,7 +158,7 @@ export function NucModulesItemOptions({
             text
             rounded
             icon="prime:ellipsis-h"
-            adType={localEnabled ? 'main' : undefined}
+            nuiType={localEnabled ? 'main' : undefined}
             severity={localEnabled ? undefined : 'secondary'}
             type="button"
             onClick={(event) => {

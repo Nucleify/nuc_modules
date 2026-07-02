@@ -41,7 +41,7 @@
         :label="config.label"
         :icon="config.icon"
         :severity="config.severity"
-        ad-type="main"
+        nui-type="main"
         text
         rounded
         @click="handleConfirm"

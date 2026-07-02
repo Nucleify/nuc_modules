@@ -1,6 +1,6 @@
 <template>
   <ad-button
-    ad-type="main"
+    nui-type="main"
     text
     rounded
     icon="prime:upload"
@@ -32,7 +32,7 @@
         >
           <ad-button
             text
-            ad-type="main"
+            nui-type="main"
             icon="prime:upload"
             @click="chooseCallback()"
             :disabled="files && files.length > 0"

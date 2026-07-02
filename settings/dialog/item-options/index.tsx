@@ -81,7 +81,7 @@ export function NucModulesItemOptionsDialog({
             label={config.label}
             icon={config.icon}
             severity={config.severity}
-            adType="main"
+            nuiType="main"
             text
             rounded
             type="button"

@@ -23,7 +23,7 @@ export function NucModulesSettingsInstallModule({
   return (
     <>
       <AdButton
-        adType="main"
+        nuiType="main"
         text
         rounded
         icon="prime:upload"
